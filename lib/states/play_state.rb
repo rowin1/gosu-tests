@@ -6,7 +6,7 @@ class PlayState < GameState
 
   def enter
     music.play(true)
-    music.volume = 1
+    music.volume = 0.6
   end
 
   def leave

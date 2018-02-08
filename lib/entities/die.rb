@@ -5,6 +5,8 @@ class Die
   def initialize
     @x = 50
     @locked = false
+    @locked_text = Gosu::Image.from_text($window,
+      "Locked", Gosu.default_font_name, 20)
     roll
   end
 
@@ -30,6 +32,7 @@ class Die
 
   def draw
     @sprite.draw(@x, $window.height / 2, 0)
+    @locked_text.draw(@x - @locked_text.width / 4, $window.height / 2 + 75, 0) if @locked
   end
 
   private
