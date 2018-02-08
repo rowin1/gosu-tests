@@ -19,7 +19,11 @@ class PlayState < GameState
   end
 
   def update
-    text = "rolls left: #{3 - @yahtzee.rolls}"
+    if @yahtzee.round == 13 && @yahtzee.rolls == 0
+      text = "GAME OVER! Final Score: #{@yahtzee.score}"
+    else
+      text = "Round: #{@yahtzee.round} / 13; Rolls remaining: #{@yahtzee.rolls}"
+    end
     @round_text = Gosu::Image.from_text($window,
       text, Gosu.default_font_name, 30)
   end

@@ -1,14 +1,19 @@
 class Yahtzee
-  attr_reader :rolls
+  attr_reader :rolls, :round
 
   def initialize
+    @rolls = 3
+    @round = 1
     init_sounds
     init_dice
   end
 
   def next_turn
-    @rolls = 0
-    reroll
+    if @round < 13
+      @round +=1
+      @rolls = 3
+      reroll
+    end
   end
 
   def update
@@ -20,15 +25,20 @@ class Yahtzee
   end
 
   def reroll
-    if @rolls < 3
+    if @rolls > 0
       roll_sound
       @dice.map(&:roll)
-      @rolls += 1
+      @rolls -= 1
     end
   end
 
   def lock_die(id)
     @dice[id - 1].toggle_lock
+  end
+
+  def score
+    # Implement
+    @score = 1337
   end
 
   private
@@ -37,7 +47,7 @@ class Yahtzee
     roll_sound
     @dice = Array.new(5) { Die.new }
     set_dice_position
-    @rolls = 1
+    @rolls -= 1
   end
 
   def set_dice_position
