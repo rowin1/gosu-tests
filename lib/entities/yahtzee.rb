@@ -20,6 +20,10 @@ class Yahtzee
     @rolls += 1
   end
 
+  def lock_die(id)
+    @dice[id - 1].toggle_lock
+  end
+
   private
 
   def set_dice_position

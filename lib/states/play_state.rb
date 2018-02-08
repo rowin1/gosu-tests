@@ -39,5 +39,20 @@ class PlayState < GameState
     if id == Gosu::KbSpace
       @yahtzee.reroll
     end
+    if id == Gosu::Kb1
+      @yahtzee.lock_die(1)
+    end
+    if id == Gosu::Kb2
+      @yahtzee.lock_die(2)
+    end
+    if id == Gosu::Kb3
+      @yahtzee.lock_die(3)
+    end
+    if id == Gosu::Kb4
+      @yahtzee.lock_die(4)
+    end
+    if id == Gosu::Kb5
+      @yahtzee.lock_die(5)
+    end
   end
 end

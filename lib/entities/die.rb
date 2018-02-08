@@ -4,12 +4,21 @@ class Die
 
   def initialize
     @x = 50
+    @locked = false
     roll
   end
 
   def roll
-    @number = Random::rand(6) + 1
-    @sprite = dice_sprite
+    if !@locked
+      @number = Random::rand(6) + 1
+      @sprite = dice_sprite
+    else
+      toggle_lock
+    end
+  end
+
+  def toggle_lock
+    @locked = !@locked
   end
 
   def to_s
