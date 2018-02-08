@@ -20,7 +20,7 @@ class PlayState < GameState
 
   def update
     if @yahtzee.round == 13 && @yahtzee.rolls == 0
-      text = "GAME OVER! Final Score: #{@yahtzee.score}"
+      text = "GAME OVER! Final Score: #{@yahtzee.score}\nN: New Game"
     else
       text = "Round: #{@yahtzee.round} / 13; Rolls remaining: #{@yahtzee.rolls}"
     end
@@ -45,6 +45,11 @@ class PlayState < GameState
     end
     if id == Gosu::KbSpace
       @yahtzee.reroll
+    end
+    if id == Gosu::KbN
+      play_state = PlayState.new
+      MenuState.instance.play_state = play_state
+      GameState.switch(play_state)
     end
     if id == Gosu::Kb1
       @yahtzee.lock_die(1)
