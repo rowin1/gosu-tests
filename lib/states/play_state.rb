@@ -19,7 +19,7 @@ class PlayState < GameState
   end
 
   def update
-    text = "rolls: #{@yahtzee.rolls}"
+    text = "rolls left: #{3 - @yahtzee.rolls}"
     @round_text = Gosu::Image.from_text($window,
       text, Gosu.default_font_name, 30)
   end
@@ -35,6 +35,9 @@ class PlayState < GameState
     $window.close if id == Gosu::KbQ
     if id == Gosu::KbEscape
       GameState.switch(MenuState.instance)
+    end
+    if id == Gosu::KbReturn
+      @yahtzee.next_turn
     end
     if id == Gosu::KbSpace
       @yahtzee.reroll
@@ -54,5 +57,6 @@ class PlayState < GameState
     if id == Gosu::Kb5
       @yahtzee.lock_die(5)
     end
+
   end
 end

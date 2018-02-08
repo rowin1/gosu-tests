@@ -4,9 +4,12 @@ class Yahtzee
   def initialize
     init_sounds
     init_dice
-    @rolls = 0
   end
 
+  def next_turn
+    @rolls = 0
+    reroll
+  end
 
   def update
     @dice.map(&:update)
@@ -17,9 +20,11 @@ class Yahtzee
   end
 
   def reroll
-    roll_sound
-    @dice.map(&:roll)
-    @rolls += 1
+    if @rolls < 3
+      roll_sound
+      @dice.map(&:roll)
+      @rolls += 1
+    end
   end
 
   def lock_die(id)
@@ -32,6 +37,7 @@ class Yahtzee
     roll_sound
     @dice = Array.new(5) { Die.new }
     set_dice_position
+    @rolls = 1
   end
 
   def set_dice_position
