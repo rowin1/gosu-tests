@@ -4,6 +4,7 @@ class Yahtzee
   def initialize
     @rolls = 3
     @round = 1
+    init_scorekeeper
     init_sounds
     init_dice
   end
@@ -36,12 +37,20 @@ class Yahtzee
     @dice[id - 1].toggle_lock
   end
 
+  def make_move(id)
+    @scorekeeper.make_move(@dice, id)
+  end
+
   def score
     # Implement
     @score = 1337
   end
 
   private
+
+  def init_scorekeeper
+    @scorekeeper = Scorekeeper.new
+  end
 
   def init_dice
     roll_sound

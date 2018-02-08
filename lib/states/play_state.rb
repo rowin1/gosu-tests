@@ -66,6 +66,12 @@ class PlayState < GameState
     if id == Gosu::Kb5
       @yahtzee.lock_die(5)
     end
+    # TEST ONLY
+    if id == Gosu::KbZ
+      puts "Testing move: large_straight"
+      @yahtzee.make_move(:large_straight)
+      #@yahtzee.next_turn REENAL
+    end
 
   end
 end
