@@ -19,10 +19,12 @@ class Yahtzee
 
   def update
     @dice.map(&:update)
+    @scorekeeper.update
   end
 
   def draw
     @dice.map(&:draw)
+    @scorekeeper.draw
   end
 
   def reroll
@@ -49,19 +51,20 @@ class Yahtzee
   private
 
   def init_scorekeeper
-    @scorekeeper = Scorekeeper.new
+    @scorekeeper = Scorekeeper.new(0, 0)
   end
 
   def init_dice
     roll_sound
     @dice = Array.new(5) { Die.new }
-    set_dice_position
+    set_dice_position($window.width / 2 - $window.width / 8, 2 * $window.height / 6)
     @rolls -= 1
   end
 
-  def set_dice_position
+  def set_dice_position(left_x, all_y)
     @dice.each_with_index do |die, index|
-      die.x = die.x + 100 * index # space between each is 100 pixels
+      die.x = left_x + $window.width / 8 * index # space between each is 100 pixels
+      die.y = all_y
     end
   end
 

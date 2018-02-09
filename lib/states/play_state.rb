@@ -20,17 +20,17 @@ class PlayState < GameState
 
   def update
     if @yahtzee.round == 13 && @yahtzee.rolls == 0
-      text = "GAME OVER! Final Score: #{@yahtzee.score}\nN: New Game"
+      text = "Game Over! Final Score: #{@yahtzee.score}\nN: New Game"
     else
-      text = "Round: #{@yahtzee.round} / 13; Rolls remaining: #{@yahtzee.rolls}"
+      text = "Round: #{@yahtzee.round} / 13 - Rolls remaining: #{@yahtzee.rolls}"
     end
     @round_text = Gosu::Image.from_text($window,
       text, Gosu.default_font_name, 30)
   end
 
   def draw
-    @round_text.draw($window.width / 2 - @round_text.width / 2,
-                    $window.height / 2 - @round_text.height / 2 + 100,
+    @round_text.draw($window.width / 2 - $window.width / 8,
+                    $window.height / 2,
                     10)
     @yahtzee.draw
   end
