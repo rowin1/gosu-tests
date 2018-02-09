@@ -1,10 +1,9 @@
 class Yahtzee
-  attr_reader :rolls, :round
+  attr_reader :rolls, :round, :dice
 
   def initialize
     @rolls = 3
     @round = 1
-    init_scorekeeper
     init_sounds
     init_dice
   end
@@ -19,12 +18,10 @@ class Yahtzee
 
   def update
     @dice.map(&:update)
-    @scorekeeper.update
   end
 
   def draw
     @dice.map(&:draw)
-    @scorekeeper.draw
   end
 
   def reroll
@@ -39,20 +36,7 @@ class Yahtzee
     @dice[id - 1].toggle_lock
   end
 
-  def make_move(id)
-    @scorekeeper.make_move(@dice, id)
-  end
-
-  def score
-    # Implement
-    @score = 1337
-  end
-
   private
-
-  def init_scorekeeper
-    @scorekeeper = Scorekeeper.new(0, 0)
-  end
 
   def init_dice
     roll_sound

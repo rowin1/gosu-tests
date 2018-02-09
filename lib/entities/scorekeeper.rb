@@ -1,7 +1,7 @@
 class Scorekeeper
   UPPER_MOVES = [:ones, :twos, :threes, :fours, :fives, :sixes]
-  LOWER_MOVES = [:full_house, :small_straight, :large_straight,
-                 :three_of_a_kind, :four_of_a_kind, :chance, :yahtzee]
+  LOWER_MOVES = [:three_of_a_kind, :four_of_a_kind, :full_house,
+                 :small_straight, :large_straight, :yahtzee, :chance]
 
   def initialize(x, y)
     @moves = Hash.new
@@ -9,9 +9,15 @@ class Scorekeeper
     @sprite = Gosu::Image.new($window, Utils.media_path('score.jpg'), false)
     @x = x
     @y = y
+    init_clickables
   end
 
-  def update
+  def inform_dice(dice)
+    @dice = dice
+  end
+
+  def handle_click
+    @clickables.each { |clickable| @moves[clickable.move_type].make_and_score(@dice) if clickable.clicked? }
   end
 
   def draw
@@ -22,17 +28,16 @@ class Scorekeeper
     upper_score_raw + upper_bonus + lower_score
   end
 
-  def make_move(dice, id)
-    @moves[id].make(dice)
-    puts "Move made: #{@moves[id].move_type}, Points: #{score_move(id)}"
-    puts "Total Score: #{total_score}"
-  end
-
-  def score_move(move)
-    @moves[move].score
-  end
-
   private
+
+  def init_clickables
+    w = 110
+    h = 22
+    x = 6
+    y_positions = [32, 58, 84, 110, 135, 159, 289, 315, 341, 366, 392, 416, 443]
+    @clickables = Array.new
+    (UPPER_MOVES + LOWER_MOVES).each_with_index { |move, i| @clickables << Clickable.new(x, y_positions[i], w, h, move) }
+  end
 
   def upper_moves
     @moves.select {|name, move| UPPER_MOVES.include? name}

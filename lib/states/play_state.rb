@@ -2,6 +2,8 @@ class PlayState < GameState
   # attr_accessor :object_pool
   def initialize
     @yahtzee = Yahtzee.new
+    @scorekeeper = Scorekeeper.new(0, 0)
+    @scorekeeper.inform_dice(@yahtzee.dice)
   end
 
   def enter
@@ -20,7 +22,7 @@ class PlayState < GameState
 
   def update
     if @yahtzee.round == 13 && @yahtzee.rolls == 0
-      text = "Game Over! Final Score: #{@yahtzee.score}\nN: New Game"
+      text = "Game Over! Final Score: #{@scorekeeper.total_score}\nN: New Game"
     else
       text = "Round: #{@yahtzee.round} / 13 - Rolls remaining: #{@yahtzee.rolls}"
     end
@@ -33,6 +35,7 @@ class PlayState < GameState
                     $window.height / 2,
                     10)
     @yahtzee.draw
+    @scorekeeper.draw
   end
 
   def button_down(id)
@@ -45,6 +48,7 @@ class PlayState < GameState
     end
     if id == Gosu::KbSpace
       @yahtzee.reroll
+      @scorekeeper.inform_dice(@yahtzee.dice)
     end
     if id == Gosu::KbN
       play_state = PlayState.new
@@ -66,12 +70,8 @@ class PlayState < GameState
     if id == Gosu::Kb5
       @yahtzee.lock_die(5)
     end
-    # TEST ONLY
-    if id == Gosu::KbZ
-      puts "Testing move: large_straight"
-      @yahtzee.make_move(:large_straight)
-      #@yahtzee.next_turn REENAL
+    if id == Gosu::MsLeft
+      @scorekeeper.handle_click
     end
-
   end
 end

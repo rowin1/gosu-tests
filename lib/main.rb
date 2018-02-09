@@ -6,6 +6,7 @@ require_relative 'entities/die'
 require_relative 'entities/yahtzee'
 require_relative 'entities/scorekeeper'
 require_relative 'entities/move'
+require_relative 'entities/clickable'
 require_relative 'game_window'
 require_relative 'utils'
 

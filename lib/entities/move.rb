@@ -7,7 +7,23 @@ class Move
   end
 
   def make(dice)
-    @score = send(@move_type, dice) unless @score
+    possible_points = send(@move_type, dice)
+    puts "Possible move: #{@move_type}, Possible Points: #{possible_points}\n"
+    puts "----"
+    possible_points
+  end
+
+  def make_and_score(dice)
+    if @score
+      puts "#{@move_type} FAILED. Already filled."
+      puts "-------"
+    else
+      @score = send(@move_type, dice)
+      puts "Move made: #{@move_type}"
+      puts "Points: #{@score}"
+      puts "Tell Yahtzee class to advance turn"
+      puts "-------"
+    end
   end
 
   private
