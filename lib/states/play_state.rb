@@ -21,7 +21,7 @@ class PlayState < GameState
   end
 
   def update
-    if @yahtzee.round == 13 && @yahtzee.rolls == 0
+    if @yahtzee.round == 13 && @yahtzee.rolls == 0 && @scorekeeper.game_over?
       text = "Game Over! Final Score: #{@scorekeeper.total_score}\nN: New Game"
     else
       text = "Round: #{@yahtzee.round} / 13 - Rolls remaining: #{@yahtzee.rolls}"

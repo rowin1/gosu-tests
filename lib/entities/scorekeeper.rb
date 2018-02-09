@@ -42,6 +42,11 @@ class Scorekeeper
     upper_score_raw + upper_bonus + lower_score
   end
 
+  def game_over?
+    (UPPER_MOVES + LOWER_MOVES).each { |move| if !!@moves[move].score then return false end}
+    return true
+  end
+
   private
 
   def init_score_ui
