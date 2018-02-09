@@ -7,10 +7,7 @@ class Move
   end
 
   def make(dice)
-    possible_points = send(@move_type, dice)
-    puts "Possible move: #{@move_type}, Possible Points: #{possible_points}\n"
-    puts "----"
-    possible_points
+    send(@move_type,dice)
   end
 
   def make_and_score(dice)

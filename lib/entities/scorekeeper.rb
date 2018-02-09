@@ -10,6 +10,7 @@ class Scorekeeper
     @x = x
     @y = y
     init_clickables
+    @font = Gosu::Font.new(20)
   end
 
   def inform_dice(dice)
@@ -20,8 +21,21 @@ class Scorekeeper
     @clickables.each { |clickable| @moves[clickable.move_type].make_and_score(@dice) if clickable.clicked? }
   end
 
+  def update
+    # Maybe update labels here instead of the draw...
+  end
+
   def draw
     @sprite.draw(@x, @y, 0)
+
+    # Needs to be fixed so the labels go in the correct locations on-screen
+    (UPPER_MOVES + LOWER_MOVES).each_with_index {|move, index|
+      if @moves[move].score then
+          @font.draw("#{@moves[move].score}", 225, 35 * index + 30, 0, 1.0, 1.0, Gosu::Color::BLACK)
+      else
+        @font.draw("#{@moves[move].make(@dice)}", 225, 35* index + 30, 0, 1.0, 1.0, Gosu::Color::RED)
+      end
+     }
   end
 
   def total_score
@@ -29,6 +43,10 @@ class Scorekeeper
   end
 
   private
+
+  def init_score_ui
+
+  end
 
   def init_clickables
     w = 110
