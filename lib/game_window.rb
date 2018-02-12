@@ -1,10 +1,11 @@
 class GameWindow < Gosu::Window
-  attr_accessor :state
+  attr_accessor :state, :debug
   attr_reader :click_x, :click_y
 
   def initialize
     super(800, 600, false)
     $window = self
+    @debug = false
   end
 
   def update
@@ -35,6 +36,10 @@ class GameWindow < Gosu::Window
   private
 
   def update_caption
-    self.caption = "Mouse click: #{self.click_x}, #{self.click_y}"
+    if @debug
+      self.caption = "Mouse click: #{self.click_x}, #{self.click_y}"
+    else
+      self.caption = "YAHTZEE"
+    end
   end
 end

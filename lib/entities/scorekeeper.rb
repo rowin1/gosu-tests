@@ -24,11 +24,11 @@ class Scorekeeper
   end
 
   def handle_click
+    # Implement yahtzee bonus checker here
     @clickables.each { |clickable| @moves[clickable.move_type].make_and_score(@dice) if clickable.clicked? }
   end
 
   def update
-    # Maybe update labels here instead of the draw...
   end
 
   def draw
