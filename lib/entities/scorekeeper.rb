@@ -13,6 +13,12 @@ class Scorekeeper
     @font = Gosu::Font.new(20)
   end
 
+  def moves_made
+    moves_made = 0
+    (UPPER_MOVES + LOWER_MOVES).each {|move| moves_made += 1 if !!@moves[move].score}
+    moves_made
+  end
+
   def inform_dice(dice)
     @dice = dice
   end
