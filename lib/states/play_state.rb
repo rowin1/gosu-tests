@@ -26,7 +26,7 @@ class PlayState < GameState
   end
 
   def update
-    if @round == 13 && @rolls == 0 && @scorekeeper.game_over?
+    if @round == 13 && @scorekeeper.game_over?
       text = "Game Over! Final Score: #{@scorekeeper.total_score}\nN: New Game"
     else
       text = "Round: #{@round} / 13 - Rolls remaining: #{@rolls}"
@@ -104,8 +104,7 @@ class PlayState < GameState
       @rolls = 3
       @moves = 1
       reroll
-    end
-    if @moves > 0
+    elsif @moves > 0
       puts "Must score a category."
     end
   end

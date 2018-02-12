@@ -54,6 +54,10 @@ class Scorekeeper
        end
       }
 
+      # Yahtzee bonuses
+      @font.draw("#{lower_score}", 240, 520, 0, 1.0, 1.0, Gosu::Color::BLACK)
+      @font.draw("#{upper_score_raw + upper_bonus}", 240, 545, 0, 1.0, 1.0, Gosu::Color::BLACK)
+      @font.draw("#{total_score}", 240, 570, 0, 1.0, 1.0, Gosu::Color::BLACK)
   end
 
   def total_score
@@ -61,7 +65,7 @@ class Scorekeeper
   end
 
   def game_over?
-    (UPPER_MOVES + LOWER_MOVES).each { |move| if !!@moves[move].score then return false end}
+    (UPPER_MOVES + LOWER_MOVES).each { |move| if !@moves[move].score then return false end}
     return true
   end
 

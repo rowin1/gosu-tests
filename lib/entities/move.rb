@@ -12,13 +12,14 @@ class Move
 
   def make_and_score(dice)
     if @score
+      puts "-------"
       puts "#{@move_type} FAILED. Already filled."
       puts "-------"
     else
       @score = send(@move_type, dice)
+      puts "-------"
       puts "Move made: #{@move_type}"
       puts "Points: #{@score}"
-      puts "Tell Yahtzee class to advance turn"
       puts "-------"
     end
   end
