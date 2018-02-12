@@ -64,11 +64,17 @@ class Move
   end
 
   def three_of_a_kind(dice)
-    # implement
+    amounts = Hash.new(0)
+    dice.each { |die| amounts[die.number] += 1 }
+    (1..6).each { |pips| return sum(dice) if amounts[pips] == 3 || amounts[pips] == 4 }
+    return 0
   end
 
   def four_of_a_kind(dice)
-    # implement
+    amounts = Hash.new(0)
+    dice.each { |die| amounts[die.number] += 1 }
+    (1..6).each { |pips| return sum(dice) if amounts[pips] == 4 }
+    return 0
   end
 
   def chance(dice)

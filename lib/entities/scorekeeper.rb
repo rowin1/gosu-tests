@@ -34,14 +34,26 @@ class Scorekeeper
   def draw
     @sprite.draw(@x, @y, 0)
 
-    # Needs to be fixed so the labels go in the correct locations on-screen
-    (UPPER_MOVES + LOWER_MOVES).each_with_index {|move, index|
+    (UPPER_MOVES).each_with_index {|move, index|
       if @moves[move].score then
-          @font.draw("#{@moves[move].score}", 225, 35 * index + 30, 0, 1.0, 1.0, Gosu::Color::BLACK)
+          @font.draw("#{@moves[move].score}", 240, 25 * index + 35, 0, 1.0, 1.0, Gosu::Color::BLACK)
       else
-        @font.draw("#{@moves[move].make(@dice)}", 225, 35* index + 30, 0, 1.0, 1.0, Gosu::Color::RED)
+        @font.draw("#{@moves[move].make(@dice)}", 240, 25 * index + 35, 0, 1.0, 1.0, Gosu::Color::RED)
       end
      }
+
+     @font.draw("#{upper_score_raw}", 240, 190, 0, 1.0, 1.0, Gosu::Color::BLACK)
+     @font.draw("#{upper_bonus}", 240, 215, 0, 1.0, 1.0, Gosu::Color::BLACK)
+     @font.draw("#{upper_score_raw + upper_bonus}", 240, 240, 0, 1.0, 1.0, Gosu::Color::BLACK)
+
+     (LOWER_MOVES).each_with_index {|move, index|
+       if @moves[move].score then
+           @font.draw("#{@moves[move].score}", 240, 25 * index + 290, 0, 1.0, 1.0, Gosu::Color::BLACK)
+       else
+         @font.draw("#{@moves[move].make(@dice)}", 240, 25 * index + 290, 0, 1.0, 1.0, Gosu::Color::RED)
+       end
+      }
+
   end
 
   def total_score
